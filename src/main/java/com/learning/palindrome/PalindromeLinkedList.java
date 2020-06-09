@@ -1,40 +1,51 @@
 package com.learning.palindrome;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class PalindromeLinkedList
 {
   public static void main(String[] args)
   {
-    ListNode listNode = new ListNode(-129, new ListNode(-129));
+    ListNode listNode = new ListNode(1, new ListNode(2, new ListNode(2, new ListNode(1))));
     System.out.println(isPalindrome(listNode));
   }
 
-  public static boolean isPalindrome(ListNode head)
+  private static boolean isPalindrome(ListNode head)
   {
-    if (head != null){
-      List<Integer> values = new ArrayList<Integer>();
-      getListFromSingleLinkedList(head, values);
-      for (int i = 0; i < values.size() / 2; i++)
-      {
-        if (!values.get(i).equals(values.get(values.size() - 1 - i)))
-        {
-          return false;
-        }
-      }
-      return true;
+    ListNode fast = head;
+    ListNode slow = head;
+    while (fast != null && fast.next != null)
+    {
+      slow = slow.next;
+      fast = fast.next.next;
     }
-   return true;
+
+    fast = head;
+    slow = reverse(slow);
+    while (slow != null)
+    {
+      if (slow.val != fast.val)
+      {
+        return false;
+      }
+      slow = slow.next;
+      fast = fast.next;
+    }
+    return true;
   }
 
-  private static void getListFromSingleLinkedList(ListNode node, List<Integer> values)
+  private static ListNode reverse(ListNode node)
   {
-    final ListNode nextNode = node.next;
-    values.add(node.val);
-    if (nextNode != null)
+    ListNode prev = null;
+    ListNode current = node;
+    ListNode next = null;
+    while (current != null)
     {
-      getListFromSingleLinkedList(nextNode, values);
+      next = current.next;
+      current.next = prev;
+      prev = current;
+      current = next;
     }
+    node = prev;
+    return node;
   }
+
 }
