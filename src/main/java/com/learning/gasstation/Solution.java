@@ -1,4 +1,4 @@
-package com.learning.station;
+package com.learning.gasstation;
 
 /**
  * There are N gas stations along a circular route, where the amount of gas at station i is gas[i].
@@ -18,7 +18,7 @@ package com.learning.station;
  * gas  = [1,2,3,4,5]
  * cost = [3,4,5,1,2]
  */
-public class GasStation
+public class Solution
 {
   public static void main(String[] args)
   {

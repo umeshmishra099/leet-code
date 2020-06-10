@@ -1,4 +1,4 @@
-package com.learning.palindrome;
+package com.learning.palindromelinkedlist;
 
 public class ListNode
 {

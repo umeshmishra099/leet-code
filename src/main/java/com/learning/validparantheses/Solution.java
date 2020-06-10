@@ -1,4 +1,4 @@
-package com.learning.valid;
+package com.learning.validparantheses;
 
 import java.util.*;
 /**
@@ -19,7 +19,7 @@ import java.util.*;
  * Input: "()[]{}"
  * Output: true
  */
-public class ValidParentheses
+public class Solution
 {
   public static void main(String[] args)
   {

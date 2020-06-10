@@ -1,4 +1,4 @@
-package com.learning.palindrome;
+package com.learning.palindromelinkedlist;
 
 /**
  * Given a singly linked list, determine if it is a palindrome.
@@ -12,7 +12,7 @@ package com.learning.palindrome;
  * Input: 1->2->2->1
  * Output: true
  */
-public class PalindromeLinkedList
+public class Solution
 {
   public static void main(String[] args)
   {

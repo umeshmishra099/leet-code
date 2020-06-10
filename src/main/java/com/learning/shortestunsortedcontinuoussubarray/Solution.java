@@ -1,4 +1,4 @@
-package com.learning.continues;
+package com.learning.shortestunsortedcontinuoussubarray;
 
 import java.util.Arrays;
 
@@ -12,7 +12,7 @@ import java.util.Arrays;
  * Output: 5
  * Explanation: You need to sort [6, 4, 8, 10, 9] in ascending order to make the whole array sorted in ascending order.
  */
-public class ShortestUnsortedContinuousSubarray
+public class Solution
 {
   public static void main(String[] args)
   {
