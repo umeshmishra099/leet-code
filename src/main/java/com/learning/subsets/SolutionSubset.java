@@ -14,7 +14,6 @@ class SolutionSubset
 
   public static List<List<Integer>> subsets(int[] nums)
   {
-
     List<List<Integer>> result = new ArrayList<>();
     final ArrayList<Integer> data = new ArrayList<>();
     result.add(data);
