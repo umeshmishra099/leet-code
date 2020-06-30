@@ -25,40 +25,65 @@ public class TopKFrequentElement
   public static void main(String[] args)
   {
     int[] input = {1, 1, 1, 2, 2, 3,2,2,3,1,5,6,5,3,6,7,6,6,6,6,8};
-    Arrays.stream(topKFrequent(input, 3)).forEach(System.out::println);
+    Arrays.stream(topKFrequent(input, 1)).forEach(System.out::println);
   }
 
   private static int[] topKFrequent(int[] nums, int k)
   {
-    Map<Integer, Integer> count = new HashMap<>();
+    Map<Integer, Integer> countFreq = new HashMap<>();
     for (int num : nums)
     {
-      count.put(num, count.getOrDefault(num, 0) + 1);
+      countFreq.put(num, countFreq.getOrDefault(num, 0) + 1);
     }
-    int[] uniqueCounts = new int[count.size()];
+    int[] uniques = new int[countFreq.size()];
     int index = 0;
-    for (Integer key : count.keySet())
+    for (Integer key : countFreq.keySet())
     {
-      uniqueCounts[index] = key;
+      uniques[index] = key;
       index = index + 1;
     }
 
-    // sort uniqueCounts based on its frequency.
-    int inputLength = uniqueCounts.length;
-
-    for (int i = 0; i < inputLength - 1; i++)
-    {
-      for (int j = 0; j < inputLength - i - 1; j++)
-      {
-        if (count.get(uniqueCounts[j]) > count.get(uniqueCounts[j + 1]))
-        {
-          int temp = uniqueCounts[j];
-          uniqueCounts[j] = uniqueCounts[j + 1];
-          uniqueCounts[j + 1] = temp;
-        }
-      }
-    }
-    return Arrays.copyOfRange(uniqueCounts, inputLength - k, inputLength);
+    // sort uniques based on its frequency.
+    int inputLength = uniques.length;
+    sort(uniques, countFreq);
+    return Arrays.copyOfRange(uniques, inputLength - k, inputLength);
   }
 
+  private static void sort(int[] input, Map<Integer, Integer> count)
+  {
+    int inputLength = input.length;
+    for (int i = inputLength / 2 - 1; i >= 0; i--)
+    {
+      heapify(input, inputLength, i, count);
+    }
+    for (int i = inputLength - 1; i >= 0; i--)
+    {
+      int temp = input[0];
+      input[0] = input[i];
+      input[i] = temp;
+      heapify(input, i, 0, count);
+    }
+  }
+
+  private static void heapify(int[] input, int inputLength, int i, Map<Integer, Integer> count)
+  {
+    int largest = i;
+    int left = 2 * i + 1;
+    int right = 2 * i + 2;
+    if (left < inputLength && count.get(input[largest]) < count.get(input[left]))
+    {
+      largest = left;
+    }
+    if (right < inputLength && count.get(input[largest]) < count.get(input[right]))
+    {
+      largest = right;
+    }
+    if (largest != i)
+    {
+      int temp = input[i];
+      input[i] = input[largest];
+      input[largest] = temp;
+      heapify(input, inputLength, largest, count);
+    }
+  }
 }
